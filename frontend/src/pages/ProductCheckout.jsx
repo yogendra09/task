@@ -81,7 +81,7 @@ const ProductCheckout = () => {
                   -
                 </button>
                 <span className="text-gray-800 text-sm font-semibold px-3">
-                  { cart && cart.find((product) => product.productId._id === params.id)?.quantity}
+                  { cart && cart.find((product) => product.productId._id === params.id)?.quantity || 0 }
                 </span>
                 <button
                   onClick={() => dispatch(asyncAddProductToCart(currentProduct))}
