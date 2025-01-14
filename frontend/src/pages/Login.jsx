@@ -38,10 +38,10 @@ const Login = () => {
   }, [dispatch, isAuthenticated, navigate]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8">
+    <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto space-y-6 font-[sans-serif] text-[#333] mt-8 "
+      className="w-full max-w-md bg-white p-8 shadow-md rounded-md space-y-6 font-sans text-gray-800"
     >
       <h2 className="text-2xl font-bold text-center">Login</h2>
       <input
@@ -50,7 +50,7 @@ const Login = () => {
         value={formData.email}
         onChange={handleChange}
         placeholder="Enter Email"
-        className="px-4 py-3 bg-gray-100 focus:bg-transparent w-full text-sm focus:outline-[#333] rounded-sm transition-all"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
       />
       <input
         type="password"
@@ -58,7 +58,7 @@ const Login = () => {
         value={formData.password}
         onChange={handleChange}
         placeholder="Enter Password"
-        className="px-4 py-3 bg-gray-100 focus:bg-transparent w-full text-sm focus:outline-[#333] rounded-sm transition-all"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
       />
       <div className="flex items-center space-x-3">
         <input
@@ -74,7 +74,7 @@ const Login = () => {
       </div>
       <button
         type="submit"
-        className="w-full px-6 py-2.5 text-sm bg-[#333] hover:bg-[#222] text-white rounded-sm transition-all"
+        className="w-full px-6 py-2.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-all"
       >
         Submit
       </button>
@@ -85,7 +85,8 @@ const Login = () => {
         </Link>
       </div>
     </form>
-    </div>
+  </div>
+  
   );
 };
 

@@ -42,59 +42,59 @@ const Register = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-50">
-      <form
-        onSubmit={submitHandler}
-        className="max-w-md mx-auto space-y-6 bg-white p-6 shadow-lg rounded-md"
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8">
+    <form
+      onSubmit={submitHandler}
+      className="w-full max-w-md bg-white p-8 shadow-lg rounded-md space-y-6"
+    >
+      <h2 className="text-2xl font-bold text-center">Register</h2>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Enter Name"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+      />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Enter Email"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+      />
+      <input
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="Enter Phone"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+      />
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        placeholder="Enter Password"
+        className="w-full px-4 py-3 bg-gray-100 focus:bg-white border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+      />
+      <button
+        type="submit"
+        className="w-full px-6 py-2.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-all"
       >
-        <h2 className="text-2xl font-bold text-center">Register</h2>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter Name"
-          className="px-4 py-3 bg-gray-100 focus:bg-white w-full text-sm focus:outline-blue-500 rounded-sm transition-all"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter Email"
-          className="px-4 py-3 bg-gray-100 focus:bg-white w-full text-sm focus:outline-blue-500 rounded-sm transition-all"
-        />
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Enter Phone"
-          className="px-4 py-3 bg-gray-100 focus:bg-white w-full text-sm focus:outline-blue-500 rounded-sm transition-all"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter Password"
-          className="px-4 py-3 bg-gray-100 focus:bg-white w-full text-sm focus:outline-blue-500 rounded-sm transition-all"
-        />
-
-        <button
-          type="submit"
-          className="w-full px-6 py-2.5 text-sm bg-[#333] hover:bg-[#222] text-white rounded-sm transition-all"
-        >
-          Register
-        </button>
-        <div className="text-sm text-center">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Login here
-          </Link>
-        </div>
-      </form>
-    </div>
+        Register
+      </button>
+      <div className="text-sm text-center">
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-600 hover:underline">
+          Login here
+        </Link>
+      </div>
+    </form>
+  </div>
+  
   );
 };
 
