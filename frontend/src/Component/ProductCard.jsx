@@ -11,27 +11,27 @@ useEffect(() => {
 }, [product]);
   return (
     <div className="bg-white rounded-lg shadow-md p-4 hover:-translate-y-1 transition-transform relative">
-      <div className="mb-4 bg-gray-100 rounded overflow-hidden">
+      <Link to={`/auth/products/${_id}`} className="mb-4 bg-gray-100 rounded overflow-hidden">
         <img
           src={imageUrl || "https://via.placeholder.com/150"}
           alt={name || "Product image"}
           className="aspect-[33/35] w-full object-contain"
         />
-      </div>
+      </Link>
       <div>
         <div className="flex justify-between items-center">
-          <h5 className="text-base font-bold text-gray-800">
+          <Link to={`/auth/products/${_id}`} className="text-base font-bold text-gray-800">
             {name || "Unknown Product"}
-          </h5>
+          </Link>
           <h6 className="text-base text-gray-800 font-bold">
             ${price || "0.00"}
           </h6>
         </div>
-        <p className="text-gray-500 text-sm mt-2">
+        <Link className="text-gray-500 text-sm mt-2">
           {name
             ? `Check out our latest ${name} offering. Perfect for your needs!`
             : "No product description available."}
-        </p>
+        </Link>
         <div className="flex items-center gap-2 mt-4">
           {/* Wishlist Button */}
           <div

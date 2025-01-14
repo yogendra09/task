@@ -19,15 +19,28 @@ const PlaceOrder = ({ setisOpen }) => {
         products: [],
     });
 
+
+
+    const handlePlaceOrder = async () => {
+   console.log(cart);
    
+        const order = {
+            userId: user.userId,
+            items: cart.map((item) => ({
+                productId: item.productId._id,
+                quantity: item.quantity,
+                price: item.productId.price,
+            })),
+            totalAmount: cart.reduce((acc, item) => acc + item.productId.price * item.quantity, 0),
+        }
 
-    const handlePlaceOrder = async () => { 
+            console.log(order);
+            
 
-        
     };
 
     useEffect(() => {
-        console.log(user);
+        console.log(user,cart);
     }, [user]);
 
     return (
@@ -135,7 +148,7 @@ const PlaceOrder = ({ setisOpen }) => {
                                     </div>
                                     <div>
                                         <input
-                                            onChange={(e)=>{
+                                            onChange={(e) => {
                                                 setFormData({
                                                     ...FormData,
                                                     shippingAddress: {

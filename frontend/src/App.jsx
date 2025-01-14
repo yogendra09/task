@@ -50,7 +50,7 @@ const UserRoutes = () => {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="products" element={<Product />} />
-        <Route path='product/checkout/:id' element={<ProductCheckout />} />
+        <Route path='products/:id' element={<ProductCheckout />} />
         <Route path='cart' element={<Cart />} />
       </Routes>
       <Footer />

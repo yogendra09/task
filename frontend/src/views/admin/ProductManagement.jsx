@@ -5,7 +5,7 @@ import {
   asyncUpdateProduct,
 } from "@/store/Actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
-import AddUpdateProduct from "@/views/services/addUpdateProduct.jsx";
+import AddUpdateProduct from "../services/AddUpdateProduct";
 
 const ProductManagement = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,6 @@
 const { catchAsyncErrors } = require("../middlewares/catchAsyncErrors");
 const User = require("../models/userModel");
+const Order = require("../models/orderModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 
 const { sendtoken } = require("../utils/sendToken");
@@ -12,7 +13,7 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 exports.currentUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.id);
   if(!user) return next(new ErrorHandler("user not exist", 401));
-  const senduser = {name:user.name,email:user.email,phone:user.phone,role:user.role,};
+  const senduser = {userId:user._id,name:user.name,email:user.email,phone:user.phone,role:user.role,};
   res.status(200).json({ status:true,data:senduser});
 });
 
@@ -53,7 +54,24 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+exports.getMyOrders = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.id);
+  if(!user) return next(new ErrorHandler("user not exist", 401));
+  const orders = await Order.find({ userId: user._id });
+  if(!orders) return next(new ErrorHandler("orders not exist", 401));
+  res.status(200).json({ status:true, data:orders,message:"orders fetched successfully"});
+});
 
+exports.placeOrder = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.id);
+  if(!user) return next(new ErrorHandler("user not exist", 401));
+  const { items, totalAmount, shippingAddress, paymentMethod } = req.body;
+  if(!items ||!totalAmount ||!shippingAddress ||!paymentMethod) return next(new ErrorHandler("please fill all fields", 400));
+  const order = await Order.create(req.body);
+  user.cart = [];
+  await user.save({ validateBeforeSave: false });
+  res.status(200).json({ status:true, data:order,message:"order placed successfully" });
+});
 
 
 

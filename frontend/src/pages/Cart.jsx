@@ -52,16 +52,16 @@ const Cart = () => {
                   <span className="font-bold">₹{subtotal.toFixed(2)}</span>
                 </li>
                 <li className="flex justify-between text-sm">
-                  Shipping <span className="font-bold">₹50.00</span>
+                  Shipping <span className="font-bold">₹500</span>
                 </li>
                 <li className="flex justify-between text-sm">
-                  Tax <span className="font-bold">₹20.00</span>
+                  Tax <span className="font-bold">₹00</span>
                 </li>
                 <hr className="border-gray-300 my-4" />
                 <li className="flex justify-between text-sm font-bold">
                   Total{" "}
                   <span>
-                    ₹{(subtotal + 50 + 20).toFixed(2)}
+                    ₹{(subtotal).toFixed(2)}
                   </span>
                 </li>
               </ul>

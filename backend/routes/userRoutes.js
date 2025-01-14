@@ -1,16 +1,15 @@
 const router = require('express').Router();
 const { isAuthenticated } = require('../middlewares/auth');
-const { currentUser, register, login, logout, getAllUsers, sendForgetPasswordOtp } = require('../controllers/userController');
+const userController = require('../controllers/userController');
 
 
 
-router.post("/",isAuthenticated,currentUser);
-router.get("/getallusers",isAuthenticated,getAllUsers);
-router.post("/register", register);
-router.post("/login", login);
-router.post("/logout",isAuthenticated,logout);
-
-
+router.post("/",isAuthenticated,userController.currentUser);
+router.get("/getallusers",isAuthenticated,userController.getAllUsers);
+router.post("/register", userController.register);
+router.post("/login", userController.login);
+router.post("/logout",isAuthenticated,userController.logout);
+router.post("/getmyorders",isAuthenticated,userController.getMyOrders);
 
 
 module.exports = router;
