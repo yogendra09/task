@@ -46,13 +46,10 @@ app.use("/api/product",require("./routes/productRoutes.js"));
 app.use("/api/order",require("./routes/orderRoutes.js"));
 // if (process.env.NODE_ENV == "production") {
   
-  app.get("*", (req, res, next) =>{
-    console.log(path.join(`${__dirname}/../frontend/dist/index.html`));
-    
-    res.sendFile(path.join(`${__dirname}/../frontend/dist`,'index.html'))
+  app.get("/", (req, res, next) =>{
+    res.send("server is ready");
   });
-// } else {
-  // app.get("/", (req, res, next) => res.send("server is ready"));
+
   app.all("*", function(req, res, next){
     next(new ErrorHandler(`Requested URL not found ${req.url}`, 404));
   })
