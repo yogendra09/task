@@ -7,8 +7,22 @@ const app = express();
 
 
 const cors = require("cors");
-app.use(cors({ origin: true, credentials: true }));
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://task-weld-psi.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
+    allowedHeaders: [
+      "X-Requested-With",
+      "Content-Type",
+      "Authorization",
+      "Cookie",
+    ],
+    credentials: true, // Allows cookies and other credentials
+  })
+);
 
 // db connection
 require("./config/database.js").connectDatabase();

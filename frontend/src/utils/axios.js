@@ -2,7 +2,6 @@ import axios from "axios";
 import { BASE_URL } from "../constants/apiUrl";
 
 const instance = axios.create({
-  // baseURL: "https://brewave.in/api",
   baseURL: `${BASE_URL}/api`,
   withCredentials:true
 })

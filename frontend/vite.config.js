@@ -9,4 +9,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://task-o08e.onrender.com',
+        changeOrigin: true,
+        secure: false, // Use this if the backend server uses self-signed SSL certificates
+      }, // <-- Ensure this bracket is present
+    },
+  },
 })
