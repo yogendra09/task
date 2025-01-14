@@ -57,7 +57,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 exports.getMyOrders = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.id);
   if(!user) return next(new ErrorHandler("user not exist", 401));
-  const orders = await Order.find({ userId: user._id });
+  const orders = await Order.find({ userId: user._id }).populate("items.productId");
   if(!orders) return next(new ErrorHandler("orders not exist", 401));
   res.status(200).json({ status:true, data:orders,message:"orders fetched successfully"});
 });
@@ -66,8 +66,22 @@ exports.placeOrder = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.id);
   if(!user) return next(new ErrorHandler("user not exist", 401));
   const { items, totalAmount, shippingAddress, paymentMethod } = req.body;
+  console.log(req.body);
+  
   if(!items ||!totalAmount ||!shippingAddress ||!paymentMethod) return next(new ErrorHandler("please fill all fields", 400));
-  const order = await Order.create(req.body);
+  const order = await Order.create({
+    userId: user._id,
+    items,
+    totalAmount,
+    shippingAddress:{
+      street:shippingAddress.street,
+      city:shippingAddress.city,
+      state:shippingAddress.state,
+      zipCode:shippingAddress.zip,
+      country:shippingAddress.country
+    },
+    paymentMethod
+  });
   user.cart = [];
   await user.save({ validateBeforeSave: false });
   res.status(200).json({ status:true, data:order,message:"order placed successfully" });

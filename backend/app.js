@@ -43,6 +43,7 @@ const ErrorHandler = require("./utils/ErrorHandler.js");
 
 app.use("/api/user",require("./routes/userRoutes.js"));
 app.use("/api/product",require("./routes/productRoutes.js"));
+app.use("/api/order",require("./routes/orderRoutes.js"));
 // if (process.env.NODE_ENV == "production") {
   
   app.get("*", (req, res, next) =>{

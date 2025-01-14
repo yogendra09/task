@@ -22,6 +22,7 @@ import ProductCheckout from '@/pages/ProductCheckout.jsx';
 import Navbar from './Component/Navbar.jsx';
 import Footer from './Component/Footer.jsx';
 import OrederManagement from './views/admin/OrederManagement.jsx';
+import Profile from './pages/Profile.jsx';
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const UserRoutes = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/profile" element={<Profile />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="products" element={<Product />} />

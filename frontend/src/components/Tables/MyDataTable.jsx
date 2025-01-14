@@ -9,6 +9,8 @@ const MyDataTable = ({
   setReload,
   getDataListURL,
   setDataList,
+  title,
+  isAdd,
 }) => {
   const [list, setList] = useState({});
   const [page, setPage] = useState(1);
@@ -17,34 +19,30 @@ const MyDataTable = ({
 
   const changePageHandler = (cp) => {
     setCountPerPage(cp);
-    setPage(1);
-    setReload(true);
+    setPage(1); // Reset to the first page on per-page change
   };
 
   const getDataList = async () => {
     try {
-      console.log(countPerPage, page, searchText);
       const response = await axios.get(
         `${getDataListURL}&size=${countPerPage}&page=${page}&search=${searchText}`
       );
-      console.log(response.data);
+
       if (response.data.status === true) {
         setList(response.data.data);
-        if (setDataList) {
-          setDataList(response.data.data);
-        }
-        setReload(false);
+        setDataList?.(response.data.data); // Call setDataList if provided
       } else {
-        setList({});
-        if (setDataList) {
-          setDataList({ rows: [], totalItems: 0 });
-        }
+        setList({ rows: [], totalItems: 0 });
+        setDataList?.({ rows: [], totalItems: 0 });
       }
-      setReload(false);
     } catch (error) {
-      console.log(error.response?.data?.message || error);
+      console.error(error.response?.data?.message || error.message);
     }
   };
+
+  useEffect(() => {
+    getDataList();
+  }, [reloadList, page, countPerPage, searchText]);
 
   const customStyles = {
     highlightOnHoverStyle: {
@@ -90,14 +88,6 @@ const MyDataTable = ({
     },
   };
 
-  useEffect(() => {
-    // if (reloadList) {
-      getDataList();
-    // }
-    console.log("reloadList", reloadList);
-    
-  }, [reloadList, page, countPerPage, searchText]);
-
   return (
     <div>
       <DataTable
@@ -118,28 +108,24 @@ const MyDataTable = ({
           selectAllRowsItem: true,
           selectAllRowsItemText: "ALL",
         }}
-        onChangePage={(page) => {
-          setPage(page);
-          setReload(true);
-        }}
+        onChangePage={(page) => setPage(page)}
         onChangeRowsPerPage={(countPerPage) => changePageHandler(countPerPage)}
         subHeaderComponent={
           <div className="w-full flex justify-between items-center">
-            <h2 className="text-lg font-bold text-black">Product List</h2>
+            <h2 className="text-lg font-bold text-black">{title}</h2>
             <div className="flex items-center space-x-4">
-              <button
-                className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
-                onClick={() => setisOpen(true)}
-              >
-                Add
-              </button>
+              {isAdd && (
+                <button
+                  className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
+                  onClick={() => setisOpen(true)}
+                >
+                  Add
+                </button>
+              )}
               <input
                 type="text"
                 value={searchText}
-                onChange={(e) => {
-                  setSearchText(e.target.value);
-                  setReload(true);
-                }}
+                onChange={(e) => setSearchText(e.target.value)}
                 placeholder="Search"
                 className="p-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-gray-500"
               />

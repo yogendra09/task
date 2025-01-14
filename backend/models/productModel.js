@@ -40,6 +40,10 @@ const productSchema = new mongoose.Schema({
     required: false,
     match:[/^(http|https):\/\/[^ "]+$/,"Invalid URL"]
   },
+  adminId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

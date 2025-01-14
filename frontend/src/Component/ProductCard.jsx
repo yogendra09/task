@@ -1,14 +1,10 @@
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import { asyncAddProductToCart } from "@/store/Actions/cartAction";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 const ProductCard = ({ product, dispatch }) => {
   const { name, imageUrl, price, _id } = product || {};
-useEffect(() => {
-  console.log(product);
-}, [product]);
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 hover:-translate-y-1 transition-transform relative">
       <Link to={`/auth/products/${_id}`} className="mb-4 bg-gray-100 rounded overflow-hidden">

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import MyDataTable from "@/components/Tables/MyDataTable";
-import {
-  asyncDeleteProduct,
-  asyncUpdateProduct,
-} from "@/store/Actions/productAction";
+import { asyncDeleteProduct } from "@/store/Actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
 import AddUpdateProduct from "../services/AddUpdateProduct";
 
@@ -12,9 +9,11 @@ const ProductManagement = () => {
   const { products } = useSelector((state) => state.productReducer);
   const [isOpen, setisOpen] = useState(false);
   const [editRow, setEditRow] = useState({});
-  const [reloadList, setReload] = useState(true);
+  const [reloadList, setReload] = useState(false);
   const [datalist, setDataList] = useState({ currentPage: 1 });
- 
+
+  const handleReload = () => setReload((prev) => !prev);
+
   const columns = [
     {
       name: "SNo.",
@@ -45,7 +44,7 @@ const ProductManagement = () => {
                 !window.confirm("Are you sure you want to delete this product?")
               )
                 return;
-              dispatch(asyncDeleteProduct(row));
+              dispatch(asyncDeleteProduct(row)).then(() => handleReload());
             }}
           >
             Del
@@ -53,26 +52,22 @@ const ProductManagement = () => {
         </div>
       ),
       ignoreRowClick: true,
-      // allowOverflow: true,
       button: true,
     },
   ];
 
-  useEffect(() => {
-    dispatch(asyncUpdateProduct());
-    
-  }, [dispatch, editRow?._id, products?.length, reloadList]);
-
   return (
     <div>
       <MyDataTable
-      reloadList={true}
+        reloadList={reloadList}
         columns={columns}
         data={products?.length > 0 ? products : []}
         getDataListURL={`/product/getallproducts?`}
         setisOpen={setisOpen}
         setReload={setReload}
         setDataList={setDataList}
+        title="Product Management"
+        isAdd={true}
       />
       {isOpen && (
         <AddUpdateProduct
@@ -80,7 +75,7 @@ const ProductManagement = () => {
           editRow={editRow}
           setEditRow={setEditRow}
           reloadList={reloadList}
-          setReload={setReload}
+          setReload={handleReload}
         />
       )}
     </div>

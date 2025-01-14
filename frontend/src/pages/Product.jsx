@@ -19,9 +19,8 @@ const useFetchData = (dispatch) => {
 const Product = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productReducer);
-  // const { cart } = useSelector((state) => state.cartReducer);
   useEffect(() => {
-    console.log(products);
+
   }, [products]);
   // Fetch data using custom hook
   useFetchData(dispatch);

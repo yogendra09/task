@@ -110,6 +110,8 @@ exports.addUpdateProduct = catchAsyncErrors(async (req, res, next) => {
     });
   } else {
     const newProduct = await Product.create(req.body);
+    newProduct.adminId = req.id;
+    await newProduct.save();
     return res.status(200).json({
       status: true,
       data: newProduct,
