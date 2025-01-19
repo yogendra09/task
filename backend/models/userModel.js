@@ -27,11 +27,6 @@ const userSchema = new mongoose.Schema({
   },
   phone:{
     type:String,
-    unique: true,
-    match:[
-      /^(\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$/,
-      'Please enter a valid phone number in the format +xx (xxx) xxx-xxxx'
-    ]
   },
   cart:[cartSchema],
   role:{
