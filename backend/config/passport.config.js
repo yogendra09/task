@@ -13,9 +13,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       const { id, displayName, emails, photos } = profile;
       try {
-        let user = await User.findOne({
-          $or: [{ email: emails[0].value }, { googleId: id }],
-        });
+        let user = await User.findOne({email:emails[0].value});
 
         if (!user) {
           user = await User.create({
