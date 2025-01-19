@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://task-weld-psi.vercel.app",
+      "https://task-99wlx995d-yogendra09s-projects.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
     allowedHeaders: [
