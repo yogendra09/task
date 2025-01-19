@@ -25,11 +25,12 @@ router.get(
       // jab https par chalyege tab kar denge secure true
       // secure: true,
     };
-  
+    
+    
     res
       .status(302)
       .cookie("token", token, options)
-      .redirect(`http://localhost:5173/googleAuth/${token}`);
+      .redirect(`https://task-weld-psi.vercel.app/googleAuth/${token}`);
     }
     else{
       res.status(400).json({status:false,message:"google auth failed"})
