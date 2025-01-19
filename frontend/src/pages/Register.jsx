@@ -25,7 +25,7 @@ const Register = () => {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = 'http://localhost:4000/auth/google';
+    window.location.href = 'https://task-o08e.onrender.com/auth/google';
   };
 
   const submitHandler = (e) => {
