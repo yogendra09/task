@@ -3,7 +3,7 @@ const express = require("express");
 const mongoStore = require("connect-mongo")
 const path = require("path");
 const app = express();
-
+const passport = require("passport");
 
 
 const cors = require("cors");
@@ -32,6 +32,7 @@ const logger = require('morgan');
 // app.use(logger("tiny"));
 
 // body parser
+require("./config/passport.config.js");
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
@@ -50,14 +51,19 @@ app.use(session({
     autoRemove:'disabled'
   })
 })) 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieparser());
 
 const { generatedErrors } =require('./middlewares/error.js');
 const ErrorHandler = require("./utils/ErrorHandler.js");
 
+
 app.use("/api/user",require("./routes/userRoutes.js"));
 app.use("/api/product",require("./routes/productRoutes.js"));
 app.use("/api/order",require("./routes/orderRoutes.js"));
+app.use("/auth/google",require("./routes/googleAuth.routes.js"));
+
 // if (process.env.NODE_ENV == "production") {
   
   app.get("/", (req, res, next) =>{

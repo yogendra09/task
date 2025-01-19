@@ -23,6 +23,7 @@ import Navbar from './Component/Navbar.jsx';
 import Footer from './Component/Footer.jsx';
 import OrederManagement from './views/admin/OrederManagement.jsx';
 import Profile from './pages/Profile.jsx';
+import GoogleAuth from './pages/GoogleAuth.jsx';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
   return (
     <>
       <Routes>
+        <Route path="/googleAuth/:token" element={<GoogleAuth />} />
         <Route path='' element={<PrivateRoute />}>
           <Route exact path="/" element={<Home />} />
           <Route path='/auth/*' element={<UserRoutes />} />

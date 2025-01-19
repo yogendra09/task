@@ -21,9 +21,12 @@ const userSchema = new mongoose.Schema({
     ],
     unique: true,
   },
+  googleId:{
+    type: String,
+    required:false,
+  },
   phone:{
     type:String,
-    required:[true,'Please enter your phone number'],
     unique: true,
     match:[
       /^(\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$/,
@@ -47,7 +50,6 @@ const userSchema = new mongoose.Schema({
   password: {
     select:false,
     type: String,
-    required: [true, 'Please enter your password'],
   },
 });
 
