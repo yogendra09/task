@@ -22,7 +22,10 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
   if (!name || !email || !phone ||!password) {
     return next(new ErrorHandler("please fill all fields", 400));
   }
-  
+  const exsisitingUser = await User.findOne({ email });
+  if (exsisitingUser) {
+    return next(new ErrorHandler("user already exist", 400));
+  }
   const newUser = new User(req.body);
 
   await newUser.save();
