@@ -30,7 +30,7 @@ router.get(
     res
       .status(302)
       .cookie("token", token, options)
-      .redirect(`https://task-weld-psi.vercel.app/googleAuth/${token}`);
+      .redirect(`https://task-99wlx995d-yogendra09s-projects.vercel.app/googleAuth/${token}`);
     }
     else{
       res.status(400).json({status:false,message:"google auth failed"})
